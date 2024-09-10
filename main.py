@@ -5,6 +5,8 @@ pygame.init()
 
 WINDOW_SIZE = (600, 600)
 BOARD_SIZE = 8
+LIGHT_BROWN = (205, 133, 63)
+DARK_BROWN = (139, 69, 19)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
@@ -34,8 +36,8 @@ def draw_chessboard(screen, board_size):
     for row in range(board_size):
         for col in range(board_size):
             # Determine square color
-            is_white_square = (row + col) % 2 == 0
-            color = WHITE if is_white_square else BLACK
+            is_light_brown = (row + col) % 2 == 0
+            color = LIGHT_BROWN if is_light_brown else DARK_BROWN
             rect = pygame.Rect(col * square_size, row * square_size, square_size, square_size)
             pygame.draw.rect(screen, color, rect)
 
@@ -43,7 +45,7 @@ def draw_chessboard(screen, board_size):
             piece = chess_pieces[row][col]
             if piece:
                 # Set font color based on square color
-                font_color = BLACK if is_white_square else WHITE
+                font_color = BLACK if is_light_brown else WHITE
                 text_surface = font.render(piece, True, font_color)
                 text_rect = text_surface.get_rect(center=rect.center)
                 screen.blit(text_surface, text_rect)
